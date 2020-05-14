@@ -1,0 +1,400 @@
+/* global : reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/* global : variables */
+:root {
+    /* background */
+    --bk-color:  lightskyblue;
+    --bk-white:  rgba(255,255,255,0.8);
+    --bk-grey: rgba(175, 172, 172, 0.5);
+    --bk-trans: rgba(0,0,0,0.5);
+
+    /* color */
+    --main: #000;
+    --alt: #FFF;
+    --sub: #444;
+    --acc: #042331;
+
+    /* font */
+    --font-main: 'Josefin Sans', sans-serif;
+    --font-alt:  'Dosis', sans-serif;
+
+    /* font size */
+    --title-lg: 5rem;
+    --title-md: 3rem;
+    --title-sm: 2.5rem;
+
+    --text-lg: 2rem;
+    --text-md: 1.5rem;
+    --text-sm: 1.2rem;
+
+    --tag-lg: 2rem;
+    --tag-md: 1.75rem;
+    --tag-sm: 1.5rem;
+
+    --icon-lg: 2.5rem;
+    --icon-md: 2rem;
+    --icon-sm: 1.5rem;
+    
+    /* spacing */
+    --sm: 5%;
+    --md: 10%;
+    --lg: 15%;
+
+    /* === dev borders === */
+    --wireframe: 3px solid darkblue;
+    --component: 3px dotted darkgreen;
+    --debugging: 3px dotted darkred;
+
+}
+
+/* global : css */
+body {
+    position: relative;
+}
+html, body {
+    font-family: var(--font-main);
+    scroll-behavior: smooth;
+}
+html {
+    scroll-snap-type: mandatory;
+    scroll-snap-type: y mandatory;
+}
+header,
+section,
+footer {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;    
+}
+
+/* global : layout */
+header,
+section,
+footer {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: minmax(25px, auto);
+    min-height: 100vh;
+    width: 100vw;
+    text-align: center;
+    transition: 0.8s all ease;
+}
+.elmnts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.elmnts:nth-child(1) {
+    grid-column: span 6;
+    grid-row: span 1;
+}
+.elmnts:nth-child(2) {
+    grid-column: span 6;
+    grid-row: span 1;
+}
+.elmnts:nth-child(3) {
+    grid-column: span 6;
+    grid-row: span 1;
+}
+button {
+    border: 2px solid var(--main);
+    background: transparent;
+    padding: 10px 5px;
+    width: 60%;
+}
+button a {
+    color: var(--main);
+    font-size: var(--text-sm);
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+button i {
+    color: var(--main);
+    font-size: var(--icon-sm);
+    padding-right: 10px;
+}
+
+/* semantic props */
+#footer,
+#header {
+    transition: 0.5s all ease;
+    background: lightskyblue;
+    color: var(--alt);
+}
+#footer .title,
+#header .title {
+    font-size: var(--title-sm);
+    letter-spacing: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-transform: uppercase;    
+}
+#footer .tag,
+#header .tag {
+    font-size: var(--tag-sm);
+    letter-spacing: 4px;
+    padding-bottom: 10px;
+    padding-left: var(--sm);
+    padding-right: var(--sm);
+    text-transform: capitalize;
+}
+#footer .text {
+    padding: 20px 10px;
+    font-size: var(--text-sm);
+}
+#footer button {
+    border: 2px solid var(--alt);
+    background: var(--main);
+}
+#footer button i,
+#footer button a {
+    color: var(--alt);
+}
+
+/* section props */
+section {
+    background: var(--bk-white);
+}
+section .title {
+    font-size: var(--title-sm);
+    letter-spacing: 6px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-transform: uppercase;    
+}
+section .tag {
+    font-size: var(--text-sm);
+    letter-spacing: 4px;
+    padding-bottom: 10px;
+    text-align: center;
+    text-transform: capitalize;
+}
+section .text {
+    font-size: var(--text-sm);
+    letter-spacing: 2px;
+    line-height: 1.6;
+    padding-bottom: 20px;
+    padding-left: var(--sm);
+    padding-right: var(--sm);
+    text-align: center;
+}
+
+/* section : input */
+section form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+    padding: var(--sm);
+}
+section form .elmnts {
+    justify-content: center;
+    align-items: flex-start;
+}
+section form .tag {
+    text-decoration: underline;
+    padding-left: 10px;
+}
+section form label {
+    font-size: var(--text-sm);
+    letter-spacing: 2px;
+    margin-left: 10px;
+    padding-bottom: 10px;
+    padding-top: 15px;
+    text-transform: capitalize;
+}
+section form input {
+    font-size: var(--text-sm);
+    height: 50px;
+    width: 90%;
+    background: transparent;
+    border: 2px solid var(--main);
+    color: var(--main);
+    font-weight: bold;
+    margin-left: 10px;
+    padding-left: 10px;
+    transition: 0.5s all ease-in;
+    
+}
+section form input:focus,
+section form textarea:focus {
+    background: var(--bk-grey);
+    font-weight: lighter;
+    transition: 0.5s all ease-out;
+    text-align: center;
+}
+section form textarea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--main);
+    color: var(--main);
+    font-size: var(--text-sm);
+    margin-bottom: 30px;
+    margin-left: 10px;
+    padding: 5px;
+    height: 75px;
+    width: 90%;
+}
+section form button {
+    background: var(--bk-color);
+    border: 2px solid var(--main);
+    color: var(--alt);
+    font-size: var(--text-sm);
+    letter-spacing: 2px;
+    margin-left: 10px;
+    text-transform: capitalize;
+    width: 90%;
+}
+section form button a,
+section form button i {
+    color: var(--alt);
+}
+
+/* section : output */
+section ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
+    border: 2px solid var(--main);
+
+    background: var(--bk-color);
+    color: var(--alt);
+    width: 90%;
+}
+section li {
+    list-style-type: none;
+    padding: 10px;
+    margin: 25px;
+    font-size: var(--text-sm);
+    text-transform: capitalize;
+}
+section ul .tag {
+    text-decoration: underline; 
+    padding: 20px;
+}
+.pnlx {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* section : about */
+#about button {
+    background: var(--bk-color);
+}
+#about button a,
+#about button i {
+    color: var(--alt);
+}
+
+
+
+
+/* section : output */
+
+/* media : desktop */
+@media (min-width: 1000px) {
+
+    /* global : layout */
+    header,
+    section,
+    footer {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);       
+    }
+    
+    /* semantic props */
+    #header .elmnts:nth-child(1) {
+        grid-column: span 12;
+        grid-row: span 1;
+    }
+
+    #footer .elmnts:nth-child(1),
+    #footer .elmnts:nth-child(2),
+    #footer .elmnts:nth-child(3) {
+        grid-column: span 4;
+    }
+    #footer .title {
+        font-size: var(--title-md);
+    }
+    #footer .tag {
+        font-size: var(--tag-md);
+    }
+    #footer .text {
+        font-size: var(--text-md);
+        text-transform: capitalize;
+        padding-bottom: 20px;
+    }
+    #footer button {
+        margin-top: 20px;
+        max-width: 300px;
+    }
+
+    /* section props */
+    section .title {
+        font-size: var(--title-md);
+    }
+    section .tag {
+        font-size: var(--tag-md);
+    }
+    section .text {
+        font-size: var(--text-md);
+        text-transform: capitalize;
+        padding-bottom: 20px;
+    }
+
+    /* section : about */
+    #about .text {
+        max-width: 900px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    #about .elmnts:nth-child(1) {
+        grid-column: span 12;
+        grid-row: span 1;
+    }
+    #about button {
+        max-width: 300px;
+    }
+
+    /* section : input */
+    section form {
+        background: var(--bk-white);
+        color: var(--main);
+        max-width: 500px;
+        max-height: 600px;
+    }
+    #input .tag {
+        font-size: var(--tag-sm);
+    }
+
+    /* section : output */
+    .pnlx {
+        max-width: 500px;
+        max-height: 500px;
+    }
+
+    
+    
+
+    
+    
+    
+}
