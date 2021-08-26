@@ -1,12 +1,23 @@
 let buttons = document.querySelector('.buttons'); // select the form buttons container
 let tabs = document.querySelectorAll('.tabs'); // select all form partitions
 
+// Declare the Form buttons
+let prev = document.querySelector('#prev'); // select the form [ previous ] action button
+let next = document.querySelector('#next'); // select the form [ next ] action button
+let confirmation = document.querySelector('#accept'); // select the preview [ confirmation ] button
+
+// Declare the List Buttons
+let resetForm = document.querySelector('#resetForm'); // select the list [ Reset Form ] button
+// update variable to [ Edit List ] button
+let controlPanel = document.querySelector('#controlPanel'); // select the list [ Edit List ] button
+
 // function [ Application Defaults ]
 applicationDefaults = () => {
 
     // select & remove the list element from view
     let list = document.querySelector('.list');
     list.style.display = 'none';
+    // list.style.display = 'flex';
 
     // select & remove the preview element from view
     let preview = document.querySelector('.preview');
@@ -15,12 +26,82 @@ applicationDefaults = () => {
     // select & display the application form element
     let form = document.querySelector('.form');
     form.style.display = 'flex';
+    // form.style.display = 'none';
+
+    // formButtonState(); // init specific buttons for the form element
 
     console.log('Application Defaults : Active.'); // test route
     
-}
+};
 // init function [ applicationDefaults ]
 applicationDefaults();
+
+// function [ formButtonState ]
+formButtonState = () => {
+
+    // display the buttons [ Next Button & Previous Button ] : Form
+    next.style.display = 'inline-block';
+    prev.style.display = 'inline-block';
+
+    // remove the buttons [ Reset Form + Settings Control Panel ] : List
+    resetForm.style.display = 'none';
+    controlPanel.style.display = 'none';
+
+    // remove the buttons [ Preview Confirmation ] : Preview
+    confirmation.style.display = 'none';
+}
+
+// function [ List Button State ]
+listButtonState = () => {
+
+    // display the buttons [ Reset Form + Settings Control Panel ] : List
+    resetForm.style.display = 'inline-block';
+    controlPanel.style.display = 'inline-block';
+
+    // remove the buttons [ Next Button & Previous Button ] : Form
+    next.style.display = 'none';
+    prev.style.display = 'none';
+
+    // remove the button [ Preview Confirmation ] : Preview
+    confirmation.style.display = 'none';
+
+}
+
+// function [ Data Confirmation State ]
+dataConfirmationState = () => {
+
+    confirmation.style.display = 'inline-block'; // display the button [ Preview Confirmation Button ] : Preview
+
+    // remove the buttons [ Next Button & Previous Button ] : Form
+    next.style.display = 'none';
+    prev.style.display = 'none';
+
+}
+// function [ Application State ]
+applicationState = () => {
+    // validate state view via display property attribute
+    if (form.style.display === 'flex') {
+        formButtonState(); // init function that displays specific buttons [ Form State ]
+        form.appendChild(buttons); // append buttons container to the form element
+        console.log('Application State : Form'); // test state
+    }
+    else if (list.style.display === 'flex') {
+        list.appendChild(buttons); // append buttons container to list element
+        listButtonState(); // init function that displays specific buttons [ List State ]
+        console.log('Application State : List'); // test state
+
+        let items = document.querySelectorAll('.items');
+        if (items.length > 1) {
+
+            console.log('Application State : Overflow Scroll on List Element');
+            list.style.overflow = 'scroll';
+        }
+    }
+
+};
+
+// init function [ Application State ]
+applicationState();
 
 let currentTab = 0; // current tab is set to first tab [ partition 01 ]
 
@@ -51,11 +132,6 @@ showTab = (n) => {
 
     fixStepIndicator(n); // init a function that display the correct tab indicator
 }
-
-// select the form application buttons
-let prev = document.querySelector('#prev')
-let next = document.querySelector('#next')
-// let submit = document.querySelector('#submit')
 
 next.addEventListener('click', (e)=> {
 
@@ -118,7 +194,7 @@ function validateForm() {
         // validate if input value is empty, null or invalid
         if (y[i].value == '') {
 
-            y[i].className += ' invalid'; // add an invalid class to the field
+            y[i].className += ' input-error'; // add an inputError class to the field
 
             valid = false; // set the current valid status to false
         }
@@ -146,6 +222,15 @@ function fixStepIndicator(n) {
     x[n].className += ' active';
 }
 
+function resetStepIndicator(n) {
+    var i, x = document.getElementsByClassName('steps');
+
+    // loop through all steps elements
+    for (i = 0; i < x.length; i++) {
+
+        x[i].className = x[i].classList.remove(' active', ''); // remove the active class name on form reset
+    }
+}
 // function [ evaluateData ]
 evaluateData = () => {
 
@@ -191,22 +276,20 @@ function previewFormData(name, desc, activeYes, activeNo, dateStart, dateEnd) {
     previewDesc.innerHTML = desc.value;
 
     // validate the boolean question
-    if (activeYes.checked == true) {
-        previewActive.innerHTML = 'Yes'; // answer is yes
-    }
-    else {
-        previewActive.innerHTML = 'No'; // answer is no
-    }
-
+    (activeYes.checked ? previewActive.innerHTML = 'Yes' : previewActive.innerHTML = 'No');
+    
     // set the preview for start & end date data values
     previewStart.innerHTML = dateStart.value;
     previewEnd.innerHTML = dateEnd.value;
 
-    // select the preview confirmation button
-    let previewConfirmationButton = document.querySelector('#accept');
+    // init function [ Application State ]
+    applicationState();
 
-    // click event [ previewConfirmationButton ]
-    previewConfirmationButton.addEventListener('click', (e)=> {
+    // init function [ Data Confirmation State ]
+    dataConfirmationState();
+
+    // click event [ Preview Confirmation Button ]
+    confirmation.addEventListener('click', (e)=> {
 
         // prevent default form submit
         e.preventDefault();
@@ -227,8 +310,10 @@ function displayList(previewName, previewDesc, previewActive, previewStart, prev
     let list = document.querySelector('.list');
     list.style.display = 'flex';
 
-    let items = document.createElement('li');
+    let items = document.createElement('li'); // create a [ li ] HTML element
     items.classList = 'items'; // set items element class to ' items '
+
+    // delare items data variables & create a span element for data input
     let name = document.createElement('span'),
         desc = document.createElement('span'),
         active = document.createElement('span'),
@@ -259,15 +344,88 @@ function displayList(previewName, previewDesc, previewActive, previewStart, prev
     // remove the form from view
     form.style.display = 'none';
 
+    // init function [ Application State ]
+    applicationState();
+
+    // click event [ Reset Form ]
+    resetForm.addEventListener('click', (e)=> {
+        
+        console.log('New Form Button : Clicked.'); // test event
+        
+        // Declare a loop iteration variable, select all [ Radio ] buttons inside the form
+        let i, radio = document.querySelectorAll('.control .radio');
+        // select all tabs [ Input ] elements
+        let inputErrors = document.querySelectorAll('.tabs .input');
+
+        // forEach [ Input Errors ]
+        inputErrors.forEach(element => {
+            element.classList.remove('input-error'); // remove the [ Input Error ] class from all elements inside the form
+        });
+
+        // loop through input elements
+        for(i = 0; i < inputErrors.length; i++) { 
+            console.log('Reset Form Input Loop : ' + inputErrors[i].className); // test the class name of the input elements on reset
+            inputErrors[i].value = ''; // restore input elements to default properties
+        }
+        
+        // forEach [ Radio Buttons ]
+        radio.forEach(element => {
+            // click event [ Radio Buttons ]
+            element.addEventListener('click', ()=> {
+
+                // validate if element is checked or un-checked
+                if (element.checked ? element.checked = true : element.checked = false);
+            });
+        });
+        
+        // loop through radio buttons
+        for(i = 0; i < radio.length; i++) {
+            console.log('New Form Button Loop : Radio = false');// test loop
+            radio[i].checked = false; // set all checked elements to false [ un-checked ]
+        }
+        console.log('New Form Button : ' +  radio); // test radio elements
+
+        e.preventDefault(); // prevent default form submit
+
+        applicationDefaults(); // init function [ application Defaults ] : resets the application state to default parameters
+        applicationState(); // init function [ Application State ] : checks the application state
+
+        formButtonState(); // init function [ Form Button State ] : displays the buttons corresponding with the form element
+        
+        currentTab = 0; // reset the current tab back to the start [ zero ]
+        showTab(currentTab); // init function [ Show Tab ] : set tab elements to zero
+        
+        /*
+            === Under Development ===
+
+            Function Reset Step Indicator
+
+        */
+        // resetStepIndicator(); // init function [ ResetStepIndicator ] : resets the form progress meter / visual
+    });
+
 }
 
 // function [ removePreFilledList ] : developer controls
-function removePreFilledList() {
+removePreFilledList = () => {
     let list = document.querySelector('.list'); // select the currect created list
-
     list.style.display = 'none'; // remove the list from view
+    console.log('DEV : list removal'); // test function
 
-    // test function
-    console.log('DEV : list removal');
+    let form = document.querySelector('.form'); //select the current form element
+    // form.style.display = 'none'; // remove the form from view
+
+    // let tabs = document.querySelectorAll('.form .tabs');
+
+    // remove the form [ Tabs ] from view
+    // tabs.forEach(element => {
+    //     element.style.display = 'none';
+    // });
+    
+    // select & display the [ Preview ] component
+    let preview = document.querySelector('.preview');
+    // preview.style.display = 'flex';
+    
 }
+// init function [ removePreFilledList ]
 removePreFilledList();
