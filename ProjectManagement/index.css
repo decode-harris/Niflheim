@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap');
+
 /* global reset */
 * {
     box-sizing: border-box;
@@ -5,33 +7,57 @@
     padding: 0;
 }
 
+/* css variables */
+:root {
+    --wireframe: 2px solid darkblue;
+    --debugging: 2px solid darkred;
+    --component: 2px solid darkgreen;
+
+    --mainfont: 'Nunito', sans-serif;
+
+    /* application color scheme */
+    --color-darkblue: rgb(4, 11, 31); /* COLOR : Dark Blue */
+    --color-darkwhite: rgb(202, 199, 199);
+    --color-accentblue:  rgb(10, 59, 133);
+
+    /* application border properties */
+    --border-white: 1px solid var(--color-darkwhite);
+
+    /* font-family: 'Nunito', sans-serif; */
+}
+
 /* global wrapper properties */
 body {
     padding: 10px;
     height: 100vh;
+
+    background: var(--color-darkblue); /* COLOR : Dark Blue */
 }
 
 /* main application properties */
 main {
+    /* display properties [ flex ] */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    /* dimensions & spacing */
     height: 100%;
     width: 100%;
     padding: 10px;
 
-    /* dev */
-    border: 2px solid red;
+    /* component styles */
+    font-family: var(--mainfont);
 }
 
-/* form layout */
+/* main application [ Form Component ] */
 form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
     min-height: 450px;
+    width: 100%;
     padding: 10px;
     position: relative;
 
@@ -50,7 +76,7 @@ form .tabs {
     display: none;
 }
 
-/* form [ Progress Module ] */
+/* application form [ Progress Module ] */
 form .progress {
     display: flex;
     justify-content: space-evenly;
@@ -101,15 +127,18 @@ form .preview {
     justify-content: center;
     padding: 10px;
     list-style-type: none;
-
-    border: 2px solid darkblue;
 }   
 form .preview .info {
     height: 100%;
     border: 2px solid red;
 }
 
-/* Un-Ordered List [ list ] */
+/*
+    Un-ordered list [ List Component ]
+
+    A container used to house & edit the users created data list elements.
+    Split into state level components for instant reactive application elements.
+*/
 .list {
     display: flex;
     flex-direction: column;
@@ -117,61 +146,165 @@ form .preview .info {
     width: 100%;
     padding: 10px;
 
+    /* background: lightblue; */
     /* dev */
-    border: 2px solid red;
+    border: var(--wireframe);
 }
 .items {
+    /* component layout [ grid 4 x 3 ] */
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: minmax(1px, auto);
     gap: 0;
-    padding: 0;
-    margin: 0;
-    max-height: 125px;
+
+    /* dimensions & spacing */
+    max-height: 200px;
     height: 100%;
     width: 100%;
-    list-style-type: none;
-    color: #FFF; /* set font color to application variable */
+    margin-bottom: 10px;
 
-    /* dev */
-    border: 2px solid darkblue;
+    /* component styles */
+    border: var(--border-white);
+    border-radius: 8px;
+    background-color: var(--color-darkblue);
+    color: #FFF;
+    
+    /* remove html defaults */
+    list-style-type: none;
+}
+.items:last-of-type {
+    margin-bottom: 80px;
 }
 .items span:nth-child(1) { /* project name */
-    grid-column: span 3;
     
-    background-color: darkslateblue;
+    grid-column: span 3;/* grid placement */
+    font-size: 0.95rem;
+    padding-left: 10px;
+    text-decoration: underline;
 }
 .items span:nth-child(2) { /* project description */
+
+    /* grid placement */
     grid-column: span 4;
+    grid-row: span 2;
+
+    font-style: italic;
+    letter-spacing: 1px;
+    padding-right: 10px;
+    
+    display: none; /* remove the description on [ Display List Function ] */
     
     /* dev */
-    background-color: limegreen;
+    /* background-color: limegreen; */
 }
 .items span:nth-child(3) { /* project active [ boolean ] */
+
+    /* grid placement */
     grid-row-start: 1;
     grid-column-start: 4;
 
+    justify-content: center;
+    align-items: center;
+    padding-left: 0; /* reset padding left for circle element */
+    
     /* dev */
-    background-color: purple;
+    /* background-color: purple; */
 }
 .items span:nth-child(4) { /* project start date */
+
+    /* grid placement */
     grid-column: span 2;
     grid-row: span 1;
-
+    
+    font-weight: bold;
+    text-align: center;
+    /* border: 1px solid #FFF; */
+    
+    display: none; /* remove the start date on [ Display List Function ] */
     /* dev */
-    background-color: orangered;
+    /* background-color: orangered; */
 }
 .items span:nth-child(5) { /* project end date */
+
+    /* grid placement */
     grid-column: span 2;
     grid-row: span 1;
-
+    
+    font-weight: bold;
+    text-align: center;
+    /* border: 1px solid #FFF; */
+    
+    display: none; /* remove the end date on [ Display List Function ] */
     /* dev */
-    background-color: skyblue;
+    /* background-color: skyblue; */
 }
 
 /* list [ items ] span data elements */
 .items span {
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5px;
+    font-size: 0.95rem;
+}
+.items .circle { /* active project circle */
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+
     /* dev */
-    border: 2px solid limegreen;
+    border: 1px solid var(--color-darkwhite);
+}
+.items .circle.active {
+    background-color: var(--color-accentblue); /* COLOR : Accent Blue */
+}
+
+/* global state [ properties ] */
+.form, .list {position: relative;}
+
+/* 
+
+    Reactive Buttons Container
+    
+    A fixed positioned element used to contain the various application buttons.
+    The buttons are reactive & listen for state changes to assign specific buttons.
+
+    Contains
+        .buttons - reactive button container
+        .btn - reactive button
+*/
+.buttons {
+    /* position properties [ fixed ] : bottom, left */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+
+    /* display properties [ flex ] */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    
+    /* component styles */
+    background: var(--color-darkblue);
+    border-top: var(--border-white);
+}
+.buttons button {
+    background: var(--color-darkblue);
+    border: var(--border-white);
+    border-radius: 6px;
+    color: var(--color-darkwhite);
+    font-size: 0.8rem;
+    margin: auto;
+    padding: 10px;
+    transition: all 0.1s ease-in;
+    text-transform: capitalize;
+    width: 95px;
+}
+.buttons button:hover {
+    background: var(--color-accentblue);
+    text-decoration: underline;
+    transition: all 0.3s ease-out;
 }
