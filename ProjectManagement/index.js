@@ -5,7 +5,7 @@ let tabs = document.querySelectorAll('.tabs'); // select all form partitions
 let prev = document.querySelector('#prev'); // select the form [ previous ] action button
 let next = document.querySelector('#next'); // select the form [ next ] action button
 let confirmation = document.querySelector('#accept'); // select the preview [ confirmation ] button
-
+let showList = document.querySelector('#showlist'); // select the form [ show list ] button
 // Declare the List Buttons
 let resetForm = document.querySelector('#resetForm'); // select the list [ Reset Form ] button
 // update variable to [ Edit List ] button
@@ -65,6 +65,9 @@ listButtonState = () => {
     // remove the button [ Preview Confirmation ] : Preview
     confirmation.style.display = 'none';
 
+    // remove the button [ Show List ] : Form Page 01
+    showList.style.display = 'none';
+
 }
 
 // function [ Data Confirmation State ]
@@ -117,9 +120,29 @@ showTab = (n) => {
     // validate if current tab position is first [ zero ]
     if (n == 0) {
         prev.style.display = 'none'; // remove the previous button
+
+
+        showList.style.display = 'inline-block'; // display the show list button
+
+        // click event [ Show List ] : display the list component
+        showList.addEventListener('click', (e)=> {
+
+            e.preventDefault(); // prevent default form submit
+
+            applicationDefaults();
+
+            list.style.display = 'flex';
+            form.style.display = 'none';
+
+            applicationState();
+
+
+        });
     }
     else {
         prev.style.display = 'flex'; // display the previous button
+
+        showList.style.display = 'none'; // remove the show list button from view
     }
 
     // validate if current tab is last [ tab length - 1 ]
@@ -347,64 +370,64 @@ function displayList(previewName, previewDesc, previewActive, previewStart, prev
     // init function [ Application State ]
     applicationState();
 
-    // click event [ Reset Form ]
-    resetForm.addEventListener('click', (e)=> {
+}
+
+// click event [ Reset Form ]
+resetForm.addEventListener('click', (e)=> {
         
-        console.log('New Form Button : Clicked.'); // test event
-        
-        // Declare a loop iteration variable, select all [ Radio ] buttons inside the form
-        let i, radio = document.querySelectorAll('.control .radio');
-        // select all tabs [ Input ] elements
-        let inputErrors = document.querySelectorAll('.tabs .input');
+    console.log('New Form Button : Clicked.'); // test event
+    
+    // Declare a loop iteration variable, select all [ Radio ] buttons inside the form
+    let i, radio = document.querySelectorAll('.control .radio');
+    // select all tabs [ Input ] elements
+    let inputErrors = document.querySelectorAll('.tabs .input');
 
-        // forEach [ Input Errors ]
-        inputErrors.forEach(element => {
-            element.classList.remove('input-error'); // remove the [ Input Error ] class from all elements inside the form
-        });
-
-        // loop through input elements
-        for(i = 0; i < inputErrors.length; i++) { 
-            console.log('Reset Form Input Loop : ' + inputErrors[i].className); // test the class name of the input elements on reset
-            inputErrors[i].value = ''; // restore input elements to default properties
-        }
-        
-        // forEach [ Radio Buttons ]
-        radio.forEach(element => {
-            // click event [ Radio Buttons ]
-            element.addEventListener('click', ()=> {
-
-                // validate if element is checked or un-checked
-                if (element.checked ? element.checked = true : element.checked = false);
-            });
-        });
-        
-        // loop through radio buttons
-        for(i = 0; i < radio.length; i++) {
-            console.log('New Form Button Loop : Radio = false');// test loop
-            radio[i].checked = false; // set all checked elements to false [ un-checked ]
-        }
-        console.log('New Form Button : ' +  radio); // test radio elements
-
-        e.preventDefault(); // prevent default form submit
-
-        applicationDefaults(); // init function [ application Defaults ] : resets the application state to default parameters
-        applicationState(); // init function [ Application State ] : checks the application state
-
-        formButtonState(); // init function [ Form Button State ] : displays the buttons corresponding with the form element
-        
-        currentTab = 0; // reset the current tab back to the start [ zero ]
-        showTab(currentTab); // init function [ Show Tab ] : set tab elements to zero
-        
-        /*
-            === Under Development ===
-
-            Function Reset Step Indicator
-
-        */
-        // resetStepIndicator(); // init function [ ResetStepIndicator ] : resets the form progress meter / visual
+    // forEach [ Input Errors ]
+    inputErrors.forEach(element => {
+        element.classList.remove('input-error'); // remove the [ Input Error ] class from all elements inside the form
     });
 
-}
+    // loop through input elements
+    for(i = 0; i < inputErrors.length; i++) { 
+        console.log('Reset Form Input Loop : ' + inputErrors[i].className); // test the class name of the input elements on reset
+        inputErrors[i].value = ''; // restore input elements to default properties
+    }
+    
+    // forEach [ Radio Buttons ]
+    radio.forEach(element => {
+        // click event [ Radio Buttons ]
+        element.addEventListener('click', ()=> {
+
+            // validate if element is checked or un-checked
+            if (element.checked ? element.checked = true : element.checked = false);
+        });
+    });
+    
+    // loop through radio buttons
+    for(i = 0; i < radio.length; i++) {
+        console.log('New Form Button Loop : Radio = false');// test loop
+        radio[i].checked = false; // set all checked elements to false [ un-checked ]
+    }
+    console.log('New Form Button : ' +  radio); // test radio elements
+
+    e.preventDefault(); // prevent default form submit
+
+    applicationDefaults(); // init function [ application Defaults ] : resets the application state to default parameters
+    applicationState(); // init function [ Application State ] : checks the application state
+
+    formButtonState(); // init function [ Form Button State ] : displays the buttons corresponding with the form element
+    
+    currentTab = 0; // reset the current tab back to the start [ zero ]
+    showTab(currentTab); // init function [ Show Tab ] : set tab elements to zero
+    
+    /*
+        === Under Development ===
+
+        Function Reset Step Indicator
+
+    */
+    // resetStepIndicator(); // init function [ ResetStepIndicator ] : resets the form progress meter / visual
+});
 
 // function [ removePreFilledList ] : developer controls
 removePreFilledList = () => {
