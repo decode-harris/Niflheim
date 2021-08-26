@@ -27,20 +27,16 @@
             </div>
             <!-- container [ progress ] -->
 
-            <!-- button [ start ] -->
-            <button class="btn" id="start">start</button>
-            <!-- button [ start ] -->
-
             <!-- tabs [ partitions ] -->
             <div class="tabs" id="partitions-01">
                 <!-- project [ name ] -->
-                <label for="name">name</label>
-                <input type="text" name="name" id="name">
+                <label for="name">project name :</label>
+                <input type="text" name="name" id="name" class="input">
                 <!-- project [ name ] -->
 
                 <!-- project [ desc ] -->
-                <label for="desc">description</label>
-                <input type="text" name="desc" id="desc">
+                <label for="desc">description :</label>
+                <input type="text" name="desc" id="desc" class="input">
                 <!-- project [ desc ] -->
             </div>
             <div class="tabs" id="partitions-02">
@@ -50,22 +46,22 @@
 
                 <!-- tabs [ control ] -->
                 <div class="control">
-                    <label for="yes">yes</label>
-                    <input type="radio" name="yes" id="yes" value="yes"> <!-- if yes, show next tab -->
+                    <label for="yes">yes :</label>
+                    <input type="radio" name="yes" id="yes" class="radio" value="yes"> <!-- if yes, show next tab -->
                 </div>
                 <div class="control">
-                    <label for="no">no</label>
-                    <input type="radio" name="no" id="no" value="no"> <!-- if no, submit current values -->
+                    <label for="no">no :</label>
+                    <input type="radio" name="no" id="no" class="radio" value="no"> <!-- if no, submit current values -->
                 </div>
                 <!-- tabs [ control ] -->
             </div>
             <div class="tabs" id="partitions-03">
                 <!-- project [ dates ] -->
-                <label for="dateStart">start</label>
-                <input type="date" name="dateStart" id="dateStart">
+                <label for="dateStart">start date :</label>
+                <input type="date" name="dateStart" id="dateStart" class="input">
 
-                <label for="dateEnd">end</label>
-                <input type="date" name="dateEnd" id="dataEnd">
+                <label for="dateEnd">end date :</label>
+                <input type="date" name="dateEnd" id="dataEnd" class="input">
                 <!-- project [ dates ] -->
             </div>
             <!-- tabs [ partitions ] -->
@@ -76,6 +72,19 @@
                 <button class="btn" id="prev" onclick="nextPrev(-1)">prev</button> <!-- button [ prev ] -->
                 <button class="btn" id="next" onclick="nextPrev(1)">next</button> <!-- button [ next ] -->
                 <!-- buttons [ prev + next ] -->
+
+                <!-- buttons [ Reset Form + Edit List ] -->
+                <button class="btn" id="resetForm">New List</button>
+                <button class="btn" id="controlPanel">Edit List</button>
+                <!-- buttons [ new + ctrl ] -->
+
+                <!-- button [ accept ] -->
+                <button class="btn" id="accept">accept</button>
+                <!-- button [ accept ] -->
+
+                <!-- button [ Show List ] -->
+                <button class="btn" id="showlist">show list</button>
+                <!-- button [ Show List ] -->
             </div>
             <!-- buttons -->
 
@@ -84,26 +93,33 @@
                 <!-- preview [ info ] -->
                 <li class="info">
                     <!-- preview [ name + desc ] -->
-                    <p id="preview-name"></p>
-                    <p id="preview-desc"></p>
+                    <p>Project Name :
+                        <span id="preview-name"></span>
+                    </p>
+                    <p>Description :
+                        <span id="preview-desc"></span>
+                    </p>
                     <!-- preview [ name + desc ] -->
                 </li>
                 <li class="info">
                     <!-- preview [ active ] -->
-                    <p id="preview-active"></p>
+                    <p>Project Active :
+                        <span id="preview-active"></span>
+                    </p>
                     <!-- preview [ active ] -->
                 </li>
                 <li class="info">
                     <!-- preview [ dates ] -->
-                    <p id="preview-startdate"></p>
-                    <p id="preview-enddate"></p>
+                    <p>Start Date :
+                        <span id="preview-startdate"></span>
+                    </p>
+                    <p>End Date :
+                        <span id="preview-enddate"></span>
+                    </p>
                     <!-- preview [ dates ] -->
                 </li>
                 <!-- preview [ info ] -->
-
-                <!-- button [ accept ] -->
-                <button class="btn" id="accept">accept</button>
-                <!-- button [ accept ] -->
+            
             </ul>
             <!-- ul [ preview ] -->
 
@@ -112,9 +128,43 @@
 
         <!-- projects [ list ] -->
         <ul class="list" id="list">
-
-            
-            
+            <!-- items [ DEV ] -->
+            <li class="items">
+                <span>Project Management Application</span>
+                <span>Enables fast creation & overview analysis of current & future projects.</span>
+                <span><!-- Active [ Circle ] --><div class="circle active"></div><!-- Active [ Circle ] --></span>
+                <span>20th September 2021</span>
+                <span>28th September 2021</span>
+            </li>
+            <li class="items">
+                <span>Digital Postcard Creator</span>
+                <span>Snap a travel photo, set the location & compose a small note to be sent or shared instantly.</span>
+                <span><!-- Active [ Circle ] --><div class="circle active"></div><!-- Active [ Circle ] --></span>
+                <span>20th September 2021</span>
+                <span>28th September 2021</span>
+            </li>
+            <li class="items">
+                <span>Coffee Shop Website</span>
+                <span>Single page application website created to enhanced my CSS layout & design skills</span>
+                <span><!-- Active [ Circle ] --><div class="circle"></div><!-- Active [ Circle ] --></span>
+                <span>20th September 2021</span>
+                <span>28th September 2021</span>
+            </li>
+            <li class="items">
+                <span>Brainwave Notetaking Application</span>
+                <span>Developed as a personal note taking application with a realtime physics engine library. </span>
+                <span><!-- Active [ Circle ] --><div class="circle active"></div><!-- Active [ Circle ] --></span>
+                <span>20th September 2021</span>
+                <span>28th September 2021</span>
+            </li>
+            <li class="items">
+                <span>Productivity Inofrmation Sorter</span>
+                <span>Enables fast creation & overview analysis of current & future projects.</span>
+                <span><!-- Active [ Circle ] --><div class="circle active"></div><!-- Active [ Circle ] --></span>
+                <span>20th September 2021</span>
+                <span>28th September 2021</span>
+            </li>
+            <!-- items [ DEV ] -->
         </ul>
         <!-- projects [ list ] -->
 
