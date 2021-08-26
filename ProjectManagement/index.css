@@ -51,7 +51,13 @@ main {
     font-family: var(--mainfont);
 }
 
-/* main application [ Form Component ] */
+/* 
+    main application [ Form Component ]
+    
+    Form component which contains tabs || partitioned elements to split up the form.
+    User will need to interact with the form to implement there project data & create 
+    a list item element.
+*/
 form {
     display: flex;
     flex-direction: column;
@@ -64,6 +70,55 @@ form {
     /* dev */
     border: 2px solid darkblue;
 }
+form label {
+    border-bottom: var(--border-white);
+    color: var(--color-darkwhite);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    /* text-decoration: underline; */
+    text-transform: capitalize;
+}
+form input[type='text'],
+form input[type='date'] {
+    background: transparent;
+    border: var(--border-white);
+    border-radius: 6px;
+    color: var(--color-darkwhite);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    height: 45px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    width: 90%;
+}
+.datetime-reset-button {
+    padding-right: 10px;
+}
+form input[type='radio'] {
+    height: 27px;
+    width: 27px;
+    
+    /* dev */
+    border: 2px solid red;
+}
+form input:active,
+form input:focus  {
+    border: var(--color-accentblue);
+    background: var(--color-darkwhite);
+    color: var(--color-darkblue);
+}
+
+/* application form [ Control Elements ] */
+form .control {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 10px;
+    min-height: 55px;
+    width: 50%;
+    padding-left: 10px;
+}
+/* application form [ Tabs Elements ] */
 form .tabs {
     display: flex;
     flex-direction: column;
@@ -76,7 +131,23 @@ form .tabs {
     display: none;
 }
 
-/* application form [ Progress Module ] */
+form .tabs .input-error {
+    transition: all 0.3s ease-in;
+    background: rgba(139, 26, 26, 0.582);
+    color: #FFF;
+}
+
+/* 
+    Application Form [ Progress Module ]
+
+    A reactive visual representation of where a user currently is inside the application form.
+    
+    Comments :
+        Refactor Javascript Events or CSS psuedo elements to react to previous button event
+            - when clicking the prev button, elements will have psuedo element properties applied
+    
+    
+*/
 form .progress {
     display: flex;
     justify-content: space-evenly;
@@ -118,19 +189,28 @@ form .steps.finish:last-child::after {
     border-radius: 50%;
 }
 
-/* form [ Confirmation Preview ] */
+/* application form [ Confirmation Preview ] */
 form .preview {
-    height: 100%;
-    
+    /* display properties [ flex ] */
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    /* dimensions & spacing */
+    height: 100%;
     padding: 10px;
+
+    /* component styles */
+    border: var(--border-white);
     list-style-type: none;
+    color: var(--color-darkwhite);
 }   
 form .preview .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
     height: 100%;
-    border: 2px solid red;
 }
 
 /*
@@ -145,10 +225,6 @@ form .preview .info {
     height: 100%;
     width: 100%;
     padding: 10px;
-
-    /* background: lightblue; */
-    /* dev */
-    border: var(--wireframe);
 }
 .items {
     /* component layout [ grid 4 x 3 ] */
