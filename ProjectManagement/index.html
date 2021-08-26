@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management [ Prototype ]</title>
+
+    <link rel="stylesheet" href="index.css">
+
+    <script defer src="index.js"></script>
+</head>
+<body>
+
+    <!-- main [ app ] wrapper -->
+    <main class="app">
+
+        <!-- form [ form ] -->
+        <form action="" class="form" id="form">
+
+            <!-- container [ progress ] -->
+            <div class="progress">
+                <!-- progress [ steps ] -->
+                <span class="steps"></span>
+                <span class="steps"></span>
+                <span class="steps"></span>
+                <!-- progress [ steps ] -->
+            </div>
+            <!-- container [ progress ] -->
+
+            <!-- button [ start ] -->
+            <button class="btn" id="start">start</button>
+            <!-- button [ start ] -->
+
+            <!-- tabs [ partitions ] -->
+            <div class="tabs" id="partitions-01">
+                <!-- project [ name ] -->
+                <label for="name">name</label>
+                <input type="text" name="name" id="name">
+                <!-- project [ name ] -->
+
+                <!-- project [ desc ] -->
+                <label for="desc">description</label>
+                <input type="text" name="desc" id="desc">
+                <!-- project [ desc ] -->
+            </div>
+            <div class="tabs" id="partitions-02">
+                <!-- project [ active ] -->
+                <label for="actv" id="actv">is the project active?</label>
+                <!-- project [ active ] -->
+
+                <!-- tabs [ control ] -->
+                <div class="control">
+                    <label for="yes">yes</label>
+                    <input type="radio" name="yes" id="yes" value="yes"> <!-- if yes, show next tab -->
+                </div>
+                <div class="control">
+                    <label for="no">no</label>
+                    <input type="radio" name="no" id="no" value="no"> <!-- if no, submit current values -->
+                </div>
+                <!-- tabs [ control ] -->
+            </div>
+            <div class="tabs" id="partitions-03">
+                <!-- project [ dates ] -->
+                <label for="dateStart">start</label>
+                <input type="date" name="dateStart" id="dateStart">
+
+                <label for="dateEnd">end</label>
+                <input type="date" name="dateEnd" id="dataEnd">
+                <!-- project [ dates ] -->
+            </div>
+            <!-- tabs [ partitions ] -->
+
+            <!-- buttons -->
+            <div class="buttons">
+                <!-- buttons [ prev + next ] -->
+                <button class="btn" id="prev" onclick="nextPrev(-1)">prev</button> <!-- button [ prev ] -->
+                <button class="btn" id="next" onclick="nextPrev(1)">next</button> <!-- button [ next ] -->
+                <!-- buttons [ prev + next ] -->
+            </div>
+            <!-- buttons -->
+
+            <!-- ul [ preview ] -->
+            <ul class="preview">
+                <!-- preview [ info ] -->
+                <li class="info">
+                    <!-- preview [ name + desc ] -->
+                    <p id="preview-name"></p>
+                    <p id="preview-desc"></p>
+                    <!-- preview [ name + desc ] -->
+                </li>
+                <li class="info">
+                    <!-- preview [ active ] -->
+                    <p id="preview-active"></p>
+                    <!-- preview [ active ] -->
+                </li>
+                <li class="info">
+                    <!-- preview [ dates ] -->
+                    <p id="preview-startdate"></p>
+                    <p id="preview-enddate"></p>
+                    <!-- preview [ dates ] -->
+                </li>
+                <!-- preview [ info ] -->
+
+                <!-- button [ accept ] -->
+                <button class="btn" id="accept">accept</button>
+                <!-- button [ accept ] -->
+            </ul>
+            <!-- ul [ preview ] -->
+
+        </form>
+        <!-- form [ form ] -->
+
+        <!-- projects [ list ] -->
+        <ul class="list" id="list">
+
+            
+            
+        </ul>
+        <!-- projects [ list ] -->
+
+    </main>
+    <!-- main [ app ] wrapper -->
+
+</body>
+</html>

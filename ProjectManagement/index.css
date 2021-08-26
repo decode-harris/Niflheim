@@ -1,0 +1,177 @@
+/* global reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* global wrapper properties */
+body {
+    padding: 10px;
+    height: 100vh;
+}
+
+/* main application properties */
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+
+    /* dev */
+    border: 2px solid red;
+}
+
+/* form layout */
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 450px;
+    padding: 10px;
+    position: relative;
+
+    /* dev */
+    border: 2px solid darkblue;
+}
+form .tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+
+    /* remove all tabs from view */
+    display: none;
+}
+
+/* form [ Progress Module ] */
+form .progress {
+    display: flex;
+    justify-content: space-evenly;
+    border: 2px solid red;
+    padding: 2%;
+}
+form .steps {
+    border: 1px solid black;
+    height : 25px;
+    width : 25px;
+    text-align: justify;
+}
+form .steps::after {
+    content: '';
+    display: inline-block;
+    text-align: justify;
+    width: 50px;
+    height: 2px;
+    background: none;
+    transform: translateX(25px);
+}
+form .steps:last-child::after {
+    background: none;
+}
+form .steps.active {
+    background-color: red;
+}
+form .steps.active::after {
+    background: none;
+}
+form .steps.finish::after {
+    background: darkslategray;
+}
+form .steps.finish:last-child::after {
+    background: none;
+}
+.form .steps.finish {
+    background-color: darkslategray;
+    border-radius: 50%;
+}
+
+/* form [ Confirmation Preview ] */
+form .preview {
+    height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    list-style-type: none;
+
+    border: 2px solid darkblue;
+}   
+form .preview .info {
+    height: 100%;
+    border: 2px solid red;
+}
+
+/* Un-Ordered List [ list ] */
+.list {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+
+    /* dev */
+    border: 2px solid red;
+}
+.items {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(1px, auto);
+    gap: 0;
+    padding: 0;
+    margin: 0;
+    max-height: 125px;
+    height: 100%;
+    width: 100%;
+    list-style-type: none;
+    color: #FFF; /* set font color to application variable */
+
+    /* dev */
+    border: 2px solid darkblue;
+}
+.items span:nth-child(1) { /* project name */
+    grid-column: span 3;
+    
+    background-color: darkslateblue;
+}
+.items span:nth-child(2) { /* project description */
+    grid-column: span 4;
+    
+    /* dev */
+    background-color: limegreen;
+}
+.items span:nth-child(3) { /* project active [ boolean ] */
+    grid-row-start: 1;
+    grid-column-start: 4;
+
+    /* dev */
+    background-color: purple;
+}
+.items span:nth-child(4) { /* project start date */
+    grid-column: span 2;
+    grid-row: span 1;
+
+    /* dev */
+    background-color: orangered;
+}
+.items span:nth-child(5) { /* project end date */
+    grid-column: span 2;
+    grid-row: span 1;
+
+    /* dev */
+    background-color: skyblue;
+}
+
+/* list [ items ] span data elements */
+.items span {
+    
+    /* dev */
+    border: 2px solid limegreen;
+}
